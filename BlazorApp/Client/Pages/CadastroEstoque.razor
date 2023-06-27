@@ -1,0 +1,88 @@
+﻿@page "/estoque"
+@using BlazorApp.Shared.DOs;
+@using BlazorApp.Client.Models
+@using BlazorApp.Client.Helpers
+
+<PageTitle>Cadastro de Produtos</PageTitle>
+
+<h1>Estoque</h1>
+
+@if (objetos == null)
+{
+    <p><em>Carregando...</em></p>
+}
+else
+{
+    <a class="btn btn-primary" href=@($"./estoque_incluir")>Incluir</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Fornecedor</th>
+                <th>Descricao</th>
+                <th></th>
+            </tr>
+        </thead>
+         <tbody>
+            @foreach (var obj in objetos)
+            {
+                <tr>
+                    <td>@obj.Nome</td>
+                    <td>@obj.Fornecedor</td>
+                    <td>@obj.Descricao</td>
+                    <td>
+                        <button class="btn btn-danger" @onclick="() => Excluir(obj.Id)">
+                            Excluir
+                        </button>
+                        <a class="btn btn-primary" href=@($"./estoque_alterar/{obj.Id}")>Alterar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    protected async override Task OnInitializedAsync()
+    {        
+        objetos = await api.RetornarTodosAsync();
+    }
+
+        private AcessoApi<EstoqueDO> api = new AcessoApi<EstoqueDO>("api/Estoque");
+        private IList<EstoqueDO>? objetos;
+
+         private EstoqueDO objetoAtual = new EstoqueDO();
+
+        private void Alterar(EstoqueDO objeto)
+            {
+                objetoAtual = new EstoqueDO 
+                {
+                    Id = objeto.Id, 
+                    Nome = objeto.Nome, 
+                    Fornecedor = objeto.Fornecedor,
+                    Descricao = objeto.Descricao
+                };
+            }
+        private async void Excluir(string? id)
+            {
+                if (id != null)
+                {
+                    await api.ExcluirAsync(id);
+                    objetos = await api.RetornarTodosAsync();
+                    this.StateHasChanged();
+                }
+            }
+
+        private async void Gravar()
+        {
+            if (objetoAtual.Id == null)
+                await api.InserirAsync(objetoAtual);
+            else
+                await api.AlterarAsync(objetoAtual);
+            
+            objetoAtual = new EstoqueDO();
+            objetos = await api.RetornarTodosAsync();
+            this.StateHasChanged();
+        }
+
+}

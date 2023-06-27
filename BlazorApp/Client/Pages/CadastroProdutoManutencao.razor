@@ -1,0 +1,121 @@
+@* @page "/produto_alterar/{Id}" *@
+@using BlazorApp.Shared.DOs;
+@using BlazorApp.Client.Models
+@using BlazorApp.Client.Helpers
+@inject NavigationManager NavigationManager
+
+<h3>Inserir produto no estoque</h3>
+
+@if (objetos == null)
+{
+    <p><em>Carregando...</em></p>
+}
+else
+{
+    <EditForm Model="@novoProduto" OnValidSubmit="@Inserir">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+        <div class="row">
+            <div class="col">
+                <label class="form-label">Preço</label>
+                <input class="form-control" @bind="@novoProduto.Preco" />
+                <ValidationMessage For="() => novoProduto.Preco" />
+            </div>
+            <div class="col">
+                <label class="form-label">Validade</label>
+                <input type="date" class="form-control" @bind="@novoProduto.Validade" />
+                <ValidationMessage For="() => novoProduto.Validade" />
+            </div>
+            <div class="col">
+                <label class="form-label">Imagem</label>
+                <Imagem Entidade="produto" Id="@IdMestre"/>                
+            </div>
+            <div class="col">
+                <br />
+                <button class="btn btn-success mt-2" type="submit">Inserir</button>
+            </div>
+        </div>
+    </EditForm>
+
+    <EditForm Model="@novoProduto" OnValidSubmit="@Atualizar">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Estoque</th>
+                    <th>Preço</th>
+                    <th>Validade</th>
+                    <th>Imagem</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in objetos)
+                {
+                    <tr>
+                        <td>@obj.EstoqueID</td>
+                        <td>@obj.Preco</td>
+                        <td>@obj.Validade.ToShortDateString()</td>
+                        <td>@obj.ImageId</td>
+                        <td>
+                            @if (obj.Id != null)
+                            {
+                                <button class="btn btn-danger" @onclick="() => ExcluirDetalhe(obj.Id)">
+                                    Excluir
+                                </button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </EditForm>
+    <hr />
+}
+
+@code {
+    protected async override Task OnInitializedAsync()
+    {        
+        objetos = await api.RetornarPorIdMestreAsync(IdMestre);
+    }
+
+    private AcessoApi<ProdutoDO> api = new AcessoApi<ProdutoDO>("api/Produto");
+
+    private IList<ProdutoDO>? objetos = null;
+
+    public ProdutoDO novoProduto = new ProdutoDO {};
+
+    [Parameter]
+    public string IdMestre { get; set; } = "";
+
+    private async void Atualizar()
+    {
+        //NavigationManager.NavigateTo("atletas");
+        //NavigationManager.NavigateTo($"atleta_alterar/{IdMestre}", true);
+        objetos = await api.RetornarPorIdMestreAsync(IdMestre);
+
+        this.StateHasChanged();
+    }
+
+    private async void Inserir()
+    {
+        novoProduto.EstoqueID = IdMestre;
+        novoProduto.ImageId = IdMestre;
+        await api.InserirAsync(novoProduto);
+
+        objetos = await api.RetornarPorIdMestreAsync(IdMestre);
+
+        novoProduto = new ProdutoDO {};
+
+        this.StateHasChanged();
+    }
+
+    private async void ExcluirDetalhe(string id)
+    {
+        if (id != null)
+        {
+            await api.ExcluirAsync(id);
+
+            Atualizar();
+        }
+    }
+}

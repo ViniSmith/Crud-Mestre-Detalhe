@@ -1,0 +1,225 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\RenaTinhoX\\Documents\\projetoCamillo\\BlazorApp\\server\\BlazorApp.Server.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\RenaTinhoX\\Documents\\projetoCamillo\\BlazorApp\\Client\\BlazorApp.Client.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\RenaTinhoX\\Documents\\projetoCamillo\\BlazorApp\\Client\\BlazorApp.Client.csproj",
+        "projectName": "BlazorApp.Client",
+        "projectPath": "C:\\Users\\RenaTinhoX\\Documents\\projetoCamillo\\BlazorApp\\Client\\BlazorApp.Client.csproj",
+        "packagesPath": "C:\\Users\\RenaTinhoX\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\RenaTinhoX\\Documents\\projetoCamillo\\BlazorApp\\Client\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\RenaTinhoX\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\RenaTinhoX\\Documents\\projetoCamillo\\BlazorApp\\Shared\\BlazorApp.Shared.csproj": {
+                "projectPath": "C:\\Users\\RenaTinhoX\\Documents\\projetoCamillo\\BlazorApp\\Shared\\BlazorApp.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Components.WebAssembly": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            },
+            "Microsoft.AspNetCore.Components.WebAssembly.DevServer": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Runtime.Mono.browser-wasm",
+              "version": "[7.0.5, 7.0.5]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "browser-wasm": {
+          "#import": []
+        }
+      }
+    },
+    "C:\\Users\\RenaTinhoX\\Documents\\projetoCamillo\\BlazorApp\\server\\BlazorApp.Server.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\RenaTinhoX\\Documents\\projetoCamillo\\BlazorApp\\server\\BlazorApp.Server.csproj",
+        "projectName": "BlazorApp.Server",
+        "projectPath": "C:\\Users\\RenaTinhoX\\Documents\\projetoCamillo\\BlazorApp\\server\\BlazorApp.Server.csproj",
+        "packagesPath": "C:\\Users\\RenaTinhoX\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\RenaTinhoX\\Documents\\projetoCamillo\\BlazorApp\\server\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\RenaTinhoX\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\RenaTinhoX\\Documents\\projetoCamillo\\BlazorApp\\Client\\BlazorApp.Client.csproj": {
+                "projectPath": "C:\\Users\\RenaTinhoX\\Documents\\projetoCamillo\\BlazorApp\\Client\\BlazorApp.Client.csproj"
+              },
+              "C:\\Users\\RenaTinhoX\\Documents\\projetoCamillo\\BlazorApp\\Shared\\BlazorApp.Shared.csproj": {
+                "projectPath": "C:\\Users\\RenaTinhoX\\Documents\\projetoCamillo\\BlazorApp\\Shared\\BlazorApp.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.0.143, )"
+            },
+            "Microsoft.AspNetCore.Components.WebAssembly.Server": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            },
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[7.0.8, )"
+            },
+            "MySQL.Data": {
+              "target": "Package",
+              "version": "[8.0.33, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\RenaTinhoX\\Documents\\projetoCamillo\\BlazorApp\\Shared\\BlazorApp.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\RenaTinhoX\\Documents\\projetoCamillo\\BlazorApp\\Shared\\BlazorApp.Shared.csproj",
+        "projectName": "BlazorApp.Shared",
+        "projectPath": "C:\\Users\\RenaTinhoX\\Documents\\projetoCamillo\\BlazorApp\\Shared\\BlazorApp.Shared.csproj",
+        "packagesPath": "C:\\Users\\RenaTinhoX\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\RenaTinhoX\\Documents\\projetoCamillo\\BlazorApp\\Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\RenaTinhoX\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

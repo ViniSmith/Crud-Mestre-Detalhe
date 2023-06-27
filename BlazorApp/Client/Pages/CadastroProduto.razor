@@ -1,0 +1,90 @@
+@page "/produto"
+@using BlazorApp.Shared.DOs;
+@using BlazorApp.Client.Models
+@using BlazorApp.Client.Helpers
+
+<PageTitle>Cadastro de Produto</PageTitle>
+
+@if (objetos == null)
+{
+    <p><em>Carregando...</em></p>
+}else
+{
+<h1>Produtos</h1>
+    <a class="btn btn-primary" href=@($"./produto_incluir")>Incluir</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Estoque</th>
+                <th>Preço</th>
+                <th>Validade</th>
+                <th>Imagem</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in objetos)
+            {
+                <tr>
+                    <td>@obj.EstoqueID</td>
+                    <td>@obj.Preco</td>
+                    <td>@obj.Validade.ToString("dd/MM/yyyy")</td>
+                    <td>@obj.ImageId</td>
+                    <td>
+                        <button class="btn btn-danger" @onclick="() => Excluir(obj.Id)">
+                            Excluir
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    protected async override Task OnInitializedAsync()
+    {        
+        objetos = await api.RetornarTodosAsync();
+    }
+
+        private AcessoApi<ProdutoDO> api = new AcessoApi<ProdutoDO>("api/Produto");
+        private IList<ProdutoDO>? objetos;
+
+         private ProdutoDO objetoAtual = new ProdutoDO();
+
+        private void Alterar(ProdutoDO objeto)
+            {
+                objetoAtual = new ProdutoDO 
+                {
+                    Id = objeto.Id, 
+                    EstoqueID = objeto.EstoqueID, 
+                    Preco = objeto.Preco,
+                    Validade = objeto.Validade,
+                    ImageId = objeto.ImageId
+                };
+            }
+        private async void Excluir(string? id)
+            {
+                if (id != null)
+                {
+                    await api.ExcluirAsync(id);
+                    objetos = await api.RetornarTodosAsync();
+                    this.StateHasChanged();
+                }
+            }
+
+        private async void Gravar()
+        {
+            if (objetoAtual.Id == null)
+                await api.InserirAsync(objetoAtual);
+            else
+                await api.AlterarAsync(objetoAtual);
+            
+            objetoAtual = new ProdutoDO();
+            objetos = await api.RetornarTodosAsync();
+            this.StateHasChanged();
+        }
+
+}

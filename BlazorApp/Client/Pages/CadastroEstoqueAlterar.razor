@@ -1,0 +1,70 @@
+@page "/estoque_alterar/{Id}"
+@using BlazorApp.Shared.DOs;
+@using BlazorApp.Client.Models
+@using BlazorApp.Client.Helpers
+@inject NavigationManager NavigationManager
+
+<PageTitle>Alterar Estoque</PageTitle>
+
+@if (obj == null)
+{
+    <p><em>Carregando...</em></p>
+}
+else
+{
+    <EditForm Model="@obj" OnValidSubmit="@Gravar">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+        <div>
+            <div>
+                <label class="form-label">Nome</label>
+                <input class="form-control" @bind="@obj.Nome" />
+                <ValidationMessage For="() => obj.Nome" />
+            </div>
+            <div>
+                <label class="form-label">Fornecedor</label>
+                <input class="form-control" @bind="@obj.Fornecedor" />
+                <ValidationMessage For="() => obj.Fornecedor" />
+            </div>
+            <div>
+                <label class="form-label">Descricao</label>
+                <input class="form-control" @bind="@obj.Descricao" />
+                <ValidationMessage For="() => obj.Descricao" />
+            </div>
+            <div class="mt-2">
+                <button class="btn btn-success" type="submit">Gravar</button>
+                <a class="ml-1 btn btn-secondary" href="./estoque">Voltar</a>
+            </div>
+
+            <CadastroProdutoManutencao IdMestre=@Id />
+
+            @* <Imagem Entidade="atleta" Id=@Id /> *@
+            
+        </div>
+    </EditForm>
+}
+
+@code {
+    protected async override Task OnInitializedAsync()
+    {        
+        obj = await api.RetornarPorIdAsync(Id);
+    }
+
+    private AcessoApi<EstoqueDO> api = new AcessoApi<EstoqueDO>("api/Estoque");
+
+    private EstoqueDO? obj = null;
+
+    [Parameter]
+    public string Id { get; set; } = "";
+
+    private async void Gravar()
+    {
+        if (obj != null)
+        {
+            if (await api.AlterarAsync(obj))
+            {
+                NavigationManager.NavigateTo("estoque");
+            }
+        }
+    }
+}

@@ -1,0 +1,53 @@
+@page "/produto_incluir"
+
+@using BlazorApp.Shared.DOs;
+@using BlazorApp.Client.Models
+@using BlazorApp.Client.Helpers
+@inject NavigationManager NavigationManager
+
+<PageTitle>Cadastro de Produto</PageTitle>
+
+<h1>Incluindo Produto</h1>
+
+<div>
+    <div>
+        <label class="form-label">Estoque</label>
+        <input class="form-control" @bind="@obj.EstoqueID" />
+    </div>
+    <div>
+        <label class="form-label">Preco</label>
+        <input class="form-control" @bind="@obj.Preco" />
+    </div>
+    <div>
+        <label class="form-label">Data de Validade</label>
+        <input type="date" @bind="@obj.Validade" />
+    </div>
+    <div>
+        <label class="form-label">Imagem</label>
+        <Imagem Entidade="produto" Id="@obj.EstoqueID"/>
+    </div>
+
+
+    <div class="mt-2">
+        <button class="btn btn-success" @onclick="Gravar">Gravar</button>
+        <a class="ml-1 btn btn-secondary" href="./produto">Voltar</a>
+    </div>
+    
+</div>
+    
+@code {
+    private AcessoApi<ProdutoDO> api = new AcessoApi<ProdutoDO>("api/Produto");
+
+    private ProdutoDO obj = new ProdutoDO();
+    [Parameter]
+    public string Id { get; set; } = "";
+
+    private async void Gravar()
+    {
+        obj.ImageId = obj.EstoqueID;
+        var objRetorno = await api.InserirAsync(obj);
+        
+        if (objRetorno != null)
+            NavigationManager.NavigateTo("produto");
+    }
+}
